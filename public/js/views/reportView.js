@@ -98,7 +98,7 @@ export function renderReportView({ report, onNavigate }) {
           </h2>
         </div>
 
-        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:0.45rem;">
+        <div class="report-actions-bar">
           ${
             report.productUrl
               ? `<a href="${escapeHtml(
@@ -391,7 +391,7 @@ export function renderReportView({ report, onNavigate }) {
         </div>
         ${renderStarDistributionBars(m.starDistribution, m.totalReviews)}
 
-        <div class="grid-3" style="gap:0.65rem;margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-subtle);font-size:0.78rem;">
+        <div class="stats-mini-3" style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-subtle);font-size:0.78rem;">
           <div>
             <span style="color:var(--text-muted);display:block;">Rata-rata Panjang</span>
             <strong style="font-family:var(--font-mono);">${m.avgWordCount} kata</strong>
@@ -446,7 +446,7 @@ export function renderReportView({ report, onNavigate }) {
           </button>
         </div>
 
-        <div style="min-width:220px;">
+        <div class="search-box-wrap">
           <input
             type="search"
             id="reviewSearchInput"
@@ -633,35 +633,35 @@ export function renderReportView({ report, onNavigate }) {
 
         return `
           <tr class="${rev.isSuspicious ? 'row-suspicious' : ''}">
-            <td style="font-family:var(--font-mono);color:var(--text-muted);">#${rev.index}</td>
-            <td>
+            <td class="rev-cell-no" style="font-family:var(--font-mono);color:var(--text-muted);">#${rev.index}</td>
+            <td class="rev-cell-user">
               <div style="font-weight:600;">${escapeHtml(rev.reviewer)}</div>
               <div style="font-size:0.73rem;color:var(--text-muted);font-family:var(--font-mono);">
                 ${escapeHtml(rev.date)}${rev.timeLabel ? ` ${escapeHtml(rev.timeLabel)}` : ''}
               </div>
             </td>
-            <td>
+            <td class="rev-cell-rating">
               <div>${renderStars(rev.rating)}</div>
-              <div style="margin-top:0.3rem;">
+              <div class="rev-sentiment-wrap" style="margin-top:0.3rem;">
                 <span class="badge ${sentimentClass}" style="font-size:0.68rem;">
                   ${sentimentLabel}
                 </span>
               </div>
             </td>
-            <td>
+            <td class="rev-cell-text">
               <div style="line-height:1.55;">${escapeHtml(rev.text)}</div>
               <div style="font-size:0.72rem;color:var(--text-muted);margin-top:0.25rem;font-family:var(--font-mono);">
                 ${rev.wordCount} kata
               </div>
             </td>
-            <td>${flagsHtml}</td>
-            <td>
+            <td class="rev-cell-flags">${flagsHtml}</td>
+            <td class="rev-cell-score">
               <span class="badge ${scoreBadge}" style="font-family:var(--font-mono);">
                 <span class="risk-dot ${dotClass}"></span>
                 ${rev.trustScore}/100
               </span>
             </td>
-            <td>
+            <td class="rev-cell-action">
               <button type="button" class="why-btn" data-why-index="${rev.index}">
                 ${ICONS.info}
                 <span>Alasan</span>

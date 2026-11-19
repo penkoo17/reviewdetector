@@ -194,15 +194,20 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: 0 1rem;
+    padding: 0 0.9rem;
   }
 
   .navbar-wrap {
-    padding: 0.65rem 1rem 0.25rem;
+    padding: 0.55rem 0.9rem 0.25rem;
   }
 
   .navbar-pill {
-    padding: 0.45rem 0.75rem;
+    padding: 0.4rem 0.5rem 0.4rem 0.72rem;
+  }
+
+  .nav-actions .btn {
+    padding: 0.36rem 0.78rem;
+    font-size: 0.78rem;
   }
 
   .desktop-nav-links {
@@ -214,34 +219,44 @@
   }
 
   .main-content {
-    padding: 1.25rem 0 6.5rem;
+    padding: 1rem 0 6.25rem;
   }
 
   .footer {
-    padding-bottom: 6.25rem;
+    padding: 1.1rem 0 5.75rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.3rem;
   }
 
   .grid-2,
   .grid-3,
-  .grid-4,
   .report-hero-grid {
     grid-template-columns: 1fr;
+    gap: 0.9rem;
   }
 
-  /* Bottom Floating Pill Navbar untuk Mobile */
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
   .mobile-bottom-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: fixed;
-    bottom: 14px;
+    bottom: max(12px, env(safe-area-inset-bottom));
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 24px);
     max-width: 420px;
     z-index: 150;
-    padding: 0.36rem;
-    background: rgba(255, 255, 255, 0.92);
+    padding: 0.34rem;
+    background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border: 1px solid var(--border-subtle);
@@ -255,13 +270,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.16rem;
-    padding: 0.45rem 0.25rem;
+    gap: 0.15rem;
+    padding: 0.44rem 0.2rem;
     border: none;
     background: transparent;
     color: var(--text-muted);
     border-radius: var(--radius-full);
-    font-size: 0.68rem;
+    font-size: 0.67rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 220ms cubic-bezier(0.22, 1, 0.36, 1);

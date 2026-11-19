@@ -42,7 +42,7 @@ export function renderLandingView({ onNavigate }) {
           </button>
         </div>
 
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;margin-bottom:1.5rem;">
+        <div class="hero-meta-row">
           <div style="font-size:0.79rem;color:var(--text-muted);">
             Tidak menghakimi mutlak — hanya memetakan pola agar belanja lebih aman.
           </div>
