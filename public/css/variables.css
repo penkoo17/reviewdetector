@@ -61,6 +61,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -78,6 +79,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 a {
@@ -91,6 +93,31 @@ a {
 a:hover {
   color: var(--viz-blue);
   text-decoration-color: var(--viz-blue);
+}
+
+button,
+a,
+[role="button"],
+.brand-logo {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button,
+.brand-logo,
+.nav-btn,
+.mobile-nav-item,
+.filter-pill,
+.layer-tab-btn,
+.why-btn {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+[role="button"]:focus:not(:focus-visible) {
+  outline: none;
 }
 
 button,

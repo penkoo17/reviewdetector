@@ -1921,7 +1921,7 @@ function renderLandingView({ onNavigate }) {
     .join('');
 
   root.innerHTML = `
-    <section class="hero-minimal anim-card">
+    <section class="hero-minimal anim-card" style="margin:3.25rem auto 2.5rem;">
       <div class="hero-kicker">
         ${ICONS.shield}
         <span>Analisis Kredibilitas Ulasan E-Commerce</span>
@@ -1939,7 +1939,7 @@ function renderLandingView({ onNavigate }) {
         <strong>Cara kerja kami:</strong> Review Detector tidak menghakimi ulasan secara mutlak. Aplikasi ini membantu melihat seberapa wajar pola ulasannya dan bagian mana yang perlu dicek ulang sebelum checkout.
       </div>
 
-      <div style="display:flex;align-items:center;justify-content:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:2.25rem;">
         <button type="button" class="btn btn-primary btn-lg" id="landingStartAnalyzeBtn">
           ${ICONS.link}
           <span>Periksa Link Produk</span>
@@ -1954,84 +1954,6 @@ function renderLandingView({ onNavigate }) {
       <div style="display:flex;align-items:center;justify-content:center;gap:0.45rem;flex-wrap:wrap;">
         <span style="font-size:0.75rem;color:var(--text-muted);margin-right:0.2rem;">Mendukung:</span>
         ${logosRow}
-      </div>
-    </section>
-
-    <section style="margin-bottom:2rem;">
-      <div class="grid-3">
-        <div class="card card-interactive anim-card anim-delay-1">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem;">
-            <span class="badge badge-info">Isi Teks &middot; 5 Sinyal</span>
-            <span style="color:var(--text-muted);">${ICONS.fileText}</span>
-          </div>
-          <h3 class="card-title" style="margin-bottom:0.35rem;">Pemeriksaan Teks</h3>
-          <p class="card-subtitle" style="line-height:1.6;">
-            Menemukan ulasan yang terlalu singkat, membahas fitur yang tidak sesuai produk, pujian berlebihan, atau keluhan di balik rating tinggi.
-          </p>
-        </div>
-
-        <div class="card card-interactive anim-card anim-delay-2">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem;">
-            <span class="badge badge-moderate">Perilaku &middot; 4 Sinyal</span>
-            <span style="color:var(--text-muted);">${ICONS.chart}</span>
-          </div>
-          <h3 class="card-title" style="margin-bottom:0.35rem;">Pola Perilaku</h3>
-          <p class="card-subtitle" style="line-height:1.6;">
-            Melihat lonjakan ulasan dalam 24–72 jam, rating 5 bintang seragam, akun baru yang langsung aktif, serta pengulas tanpa riwayat toko lain.
-          </p>
-        </div>
-
-        <div class="card card-interactive anim-card anim-delay-3">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem;">
-            <span class="badge badge-high">Koordinasi &middot; 3 Sinyal</span>
-            <span style="color:var(--text-muted);">${ICONS.layers}</span>
-          </div>
-          <h3 class="card-title" style="margin-bottom:0.35rem;">Indikasi Koordinasi</h3>
-          <p class="card-subtitle" style="line-height:1.6;">
-            Mendeteksi kalimat yang hampir sama antar-pembeli, kelompok akun serupa, serta ulasan yang masuk berdekatan di jam yang sama.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="card anim-card anim-delay-4">
-      <div class="card-header" style="margin-bottom:1rem;">
-        <div>
-          <h3 class="card-title">Panduan Skor Kepercayaan</h3>
-          <p class="card-subtitle">Setiap produk dinilai dari 0 sampai 100 berdasarkan kewajaran pola ulasannya.</p>
-        </div>
-      </div>
-
-      <div class="grid-3">
-        <div style="padding:0.9rem 1rem;border-radius:10px;background:var(--risk-low-bg);border:1px solid var(--risk-low-border);">
-          <div class="trust-legend-row" style="font-weight:700;font-size:0.86rem;color:var(--risk-low-ink);margin-bottom:0.2rem;">
-            <span class="risk-dot risk-dot-low"></span>
-            <span>80–100 &middot; Low Risk</span>
-          </div>
-          <p style="font-size:0.79rem;color:var(--text-secondary);">
-            Sebagian besar ulasan tampak alami, menceritakan pemakaian nyata, dan sesuai dengan rating bintangnya.
-          </p>
-        </div>
-
-        <div style="padding:0.9rem 1rem;border-radius:10px;background:var(--risk-moderate-bg);border:1px solid var(--risk-moderate-border);">
-          <div class="trust-legend-row" style="font-weight:700;font-size:0.86rem;color:var(--risk-moderate-ink);margin-bottom:0.2rem;">
-            <span class="risk-dot risk-dot-moderate"></span>
-            <span>60–79 &middot; Moderate Risk</span>
-          </div>
-          <p style="font-size:0.79rem;color:var(--text-secondary);">
-            Ada beberapa ulasan umum atau pola kurang wajar. Sebaiknya baca komentar dengan skor tinggi sebelum membeli.
-          </p>
-        </div>
-
-        <div style="padding:0.9rem 1rem;border-radius:10px;background:var(--risk-high-bg);border:1px solid var(--risk-high-border);">
-          <div class="trust-legend-row" style="font-weight:700;font-size:0.86rem;color:var(--risk-high-ink);margin-bottom:0.2rem;">
-            <span class="risk-dot risk-dot-high"></span>
-            <span>0–59 &middot; High Risk</span>
-          </div>
-          <p style="font-size:0.79rem;color:var(--text-secondary);">
-            Banyak tanda ketidakwajaran seperti kalimat mirip, lonjakan ulasan singkat, atau rating tidak cocok dengan isi teks.
-          </p>
-        </div>
       </div>
     </section>
   `;
@@ -2055,7 +1977,7 @@ function renderAnalyzerView({ onAnalysisComplete }) {
     .join('');
 
   root.innerHTML = `
-    <div style="max-width:760px;margin:0.75rem auto 0;">
+    <div style="max-width:720px;margin:2rem auto 0;">
       <div class="anim-card" style="margin-bottom:1.5rem;">
         <div style="font-size:0.74rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--viz-blue);margin-bottom:0.35rem;">
           Pemindai Ulasan Produk
@@ -2064,11 +1986,11 @@ function renderAnalyzerView({ onAnalysisComplete }) {
           Periksa Link Produk
         </h2>
         <p style="color:var(--text-secondary);font-size:0.92rem;">
-          Tempel tautan produk yang ingin Anda cek. Sistem akan mengambil ulasannya dan memeriksa pola keaslian dari sisi teks, perilaku, dan koordinasi.
+          Tempel tautan produk yang ingin Anda cek untuk melihat kewajaran ulasannya sebelum membeli.
         </p>
       </div>
 
-      <div class="card anim-card anim-delay-1" style="margin-bottom:1.25rem;">
+      <div class="card anim-card anim-delay-1">
         <div class="form-group">
           <label class="form-label" for="inputProductUrl">
             Tautan Produk
@@ -2111,44 +2033,6 @@ function renderAnalyzerView({ onAnalysisComplete }) {
           ${ICONS.search}
           <span>Periksa Ulasan Sekarang</span>
         </button>
-      </div>
-
-      <div class="grid-3 anim-card anim-delay-2">
-        <div class="card-subtle" style="padding:1.05rem 1.15rem;">
-          <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:var(--viz-blue);margin-bottom:0.4rem;">
-            Isi Teks (5)
-          </div>
-          <ul style="padding-left:1rem;font-size:0.78rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.22rem;">
-            <li>Terlalu generik</li>
-            <li>Detail tidak masuk akal</li>
-            <li>Emosi berlebihan</li>
-            <li>Tidak menyebut pengalaman</li>
-            <li>Rating tidak cocok isi</li>
-          </ul>
-        </div>
-
-        <div class="card-subtle" style="padding:1.05rem 1.15rem;">
-          <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:var(--risk-moderate-ink);margin-bottom:0.4rem;">
-            Perilaku (4)
-          </div>
-          <ul style="padding-left:1rem;font-size:0.78rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.22rem;">
-            <li>Review burst (24–72 jam)</li>
-            <li>Rating seragam 5 bintang</li>
-            <li>Reviewer baru aktif</li>
-            <li>Reviewer hanya satu toko</li>
-          </ul>
-        </div>
-
-        <div class="card-subtle" style="padding:1.05rem 1.15rem;">
-          <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:var(--risk-high-ink);margin-bottom:0.4rem;">
-            Koordinasi (3)
-          </div>
-          <ul style="padding-left:1rem;font-size:0.78rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.22rem;">
-            <li>Review sangat mirip</li>
-            <li>Kelompok reviewer sama</li>
-            <li>Pola waktu serentak</li>
-          </ul>
-        </div>
       </div>
     </div>
   `;
@@ -3101,23 +2985,52 @@ async function renderHistoryView({ onOpenReport, onNavigate }) {
 
 
 
-function triggerViewTransition() {
+let navTransitionToken = 0;
+let activeScrollObserver = null;
+
+function setupScrollRevealAnimations() {
   const root = document.getElementById('appViewRoot');
   if (!root) return;
-  root.classList.remove('view-enter');
-  void root.offsetWidth;
-  root.classList.add('view-enter');
-}
-function navigateTo(viewName) {
-  appState.currentView = viewName;
 
-  document.querySelectorAll('[data-nav]').forEach((btn) => {
-    const target = btn.getAttribute('data-nav');
-    btn.classList.toggle('active', target === viewName);
+  if (activeScrollObserver) {
+    activeScrollObserver.disconnect();
+    activeScrollObserver = null;
+  }
+
+  const targets = root.querySelectorAll('.card, .card-subtle, .stat-card');
+  if (!targets.length) return;
+
+  if (typeof IntersectionObserver === 'undefined') {
+    targets.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  activeScrollObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.06, rootMargin: '0px 0px -24px 0px' }
+  );
+
+  targets.forEach((el, idx) => {
+    if (el.dataset.scrollBound || el.classList.contains('is-visible')) return;
+    el.dataset.scrollBound = '1';
+    const rect = el.getBoundingClientRect();
+    if (rect.top > viewportHeight * 0.96) {
+      el.classList.add('scroll-reveal');
+      el.style.transitionDelay = `${Math.min(idx % 3, 2) * 55}ms`;
+      activeScrollObserver.observe(el);
+    }
   });
+}
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
+function renderActiveView(viewName) {
   if (viewName === 'landing') {
     renderLandingView({ onNavigate: navigateTo });
   } else if (viewName === 'analyzer') {
@@ -3153,11 +3066,53 @@ function navigateTo(viewName) {
       onNavigate: navigateTo,
     });
   }
+}
+function navigateTo(viewName) {
+  const root = document.getElementById('appViewRoot');
+  const hadContent = Boolean(root && root.innerHTML.trim().length > 0);
+  const currentToken = ++navTransitionToken;
 
-  triggerViewTransition();
+  appState.currentView = viewName;
+
+  document.querySelectorAll('[data-nav]').forEach((btn) => {
+    const target = btn.getAttribute('data-nav');
+    btn.classList.toggle('active', target === viewName);
+  });
+
+  const mountView = () => {
+    if (currentToken !== navTransitionToken) return;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    renderActiveView(viewName);
+
+    if (root) {
+      root.classList.remove('view-leave', 'view-enter');
+      void root.offsetWidth;
+      root.classList.add('view-enter');
+    }
+
+    requestAnimationFrame(() => {
+      setupScrollRevealAnimations();
+    });
+  };
+
+  if (hadContent && root) {
+    root.classList.remove('view-enter');
+    root.classList.add('view-leave');
+    setTimeout(mountView, 130);
+  } else {
+    mountView();
+  }
 }
 
 async function initApp() {
+  const root = document.getElementById('appViewRoot');
+  if (root && typeof MutationObserver !== 'undefined') {
+    const domObserver = new MutationObserver(() => {
+      setupScrollRevealAnimations();
+    });
+    domObserver.observe(root, { childList: true, subtree: true });
+  }
+
   document.querySelectorAll('[data-nav]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const target = btn.getAttribute('data-nav');
@@ -3191,7 +3146,7 @@ async function initApp() {
       navigateTo('report');
       return;
     } catch {
-      // Lanjut ke halaman utama bila laporan tidak ditemukan
+      // Lanjut ke beranda bila tidak ditemukan
     }
   }
 

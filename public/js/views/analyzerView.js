@@ -14,7 +14,7 @@ export function renderAnalyzerView({ onAnalysisComplete }) {
     .join('');
 
   root.innerHTML = `
-    <div style="max-width:760px;margin:0.75rem auto 0;">
+    <div style="max-width:720px;margin:2rem auto 0;">
       <div class="anim-card" style="margin-bottom:1.5rem;">
         <div style="font-size:0.74rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--viz-blue);margin-bottom:0.35rem;">
           Pemindai Ulasan Produk
@@ -23,11 +23,11 @@ export function renderAnalyzerView({ onAnalysisComplete }) {
           Periksa Link Produk
         </h2>
         <p style="color:var(--text-secondary);font-size:0.92rem;">
-          Tempel tautan produk yang ingin Anda cek. Sistem akan mengambil ulasannya dan memeriksa pola keaslian dari sisi teks, perilaku, dan koordinasi.
+          Tempel tautan produk yang ingin Anda cek untuk melihat kewajaran ulasannya sebelum membeli.
         </p>
       </div>
 
-      <div class="card anim-card anim-delay-1" style="margin-bottom:1.25rem;">
+      <div class="card anim-card anim-delay-1">
         <div class="form-group">
           <label class="form-label" for="inputProductUrl">
             Tautan Produk
@@ -70,44 +70,6 @@ export function renderAnalyzerView({ onAnalysisComplete }) {
           ${ICONS.search}
           <span>Periksa Ulasan Sekarang</span>
         </button>
-      </div>
-
-      <div class="grid-3 anim-card anim-delay-2">
-        <div class="card-subtle" style="padding:1.05rem 1.15rem;">
-          <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:var(--viz-blue);margin-bottom:0.4rem;">
-            Isi Teks (5)
-          </div>
-          <ul style="padding-left:1rem;font-size:0.78rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.22rem;">
-            <li>Terlalu generik</li>
-            <li>Detail tidak masuk akal</li>
-            <li>Emosi berlebihan</li>
-            <li>Tidak menyebut pengalaman</li>
-            <li>Rating tidak cocok isi</li>
-          </ul>
-        </div>
-
-        <div class="card-subtle" style="padding:1.05rem 1.15rem;">
-          <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:var(--risk-moderate-ink);margin-bottom:0.4rem;">
-            Perilaku (4)
-          </div>
-          <ul style="padding-left:1rem;font-size:0.78rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.22rem;">
-            <li>Review burst (24–72 jam)</li>
-            <li>Rating seragam 5 bintang</li>
-            <li>Reviewer baru aktif</li>
-            <li>Reviewer hanya satu toko</li>
-          </ul>
-        </div>
-
-        <div class="card-subtle" style="padding:1.05rem 1.15rem;">
-          <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:var(--risk-high-ink);margin-bottom:0.4rem;">
-            Koordinasi (3)
-          </div>
-          <ul style="padding-left:1rem;font-size:0.78rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.22rem;">
-            <li>Review sangat mirip</li>
-            <li>Kelompok reviewer sama</li>
-            <li>Pola waktu serentak</li>
-          </ul>
-        </div>
       </div>
     </div>
   `;

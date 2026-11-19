@@ -6,24 +6,52 @@ import { renderReportView } from './views/reportView.js';
 import { renderHistoryView } from './views/historyView.js';
 import { closeModal, showToast } from './components/modal.js';
 
-function triggerViewTransition() {
+let navTransitionToken = 0;
+let activeScrollObserver = null;
+
+function setupScrollRevealAnimations() {
   const root = document.getElementById('appViewRoot');
   if (!root) return;
-  root.classList.remove('view-enter');
-  void root.offsetWidth;
-  root.classList.add('view-enter');
+
+  if (activeScrollObserver) {
+    activeScrollObserver.disconnect();
+    activeScrollObserver = null;
+  }
+
+  const targets = root.querySelectorAll('.card, .card-subtle, .stat-card');
+  if (!targets.length) return;
+
+  if (typeof IntersectionObserver === 'undefined') {
+    targets.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  activeScrollObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.06, rootMargin: '0px 0px -24px 0px' }
+  );
+
+  targets.forEach((el, idx) => {
+    if (el.dataset.scrollBound || el.classList.contains('is-visible')) return;
+    el.dataset.scrollBound = '1';
+    const rect = el.getBoundingClientRect();
+    if (rect.top > viewportHeight * 0.96) {
+      el.classList.add('scroll-reveal');
+      el.style.transitionDelay = `${Math.min(idx % 3, 2) * 55}ms`;
+      activeScrollObserver.observe(el);
+    }
+  });
 }
 
-export function navigateTo(viewName) {
-  appState.currentView = viewName;
-
-  document.querySelectorAll('[data-nav]').forEach((btn) => {
-    const target = btn.getAttribute('data-nav');
-    btn.classList.toggle('active', target === viewName);
-  });
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
+function renderActiveView(viewName) {
   if (viewName === 'landing') {
     renderLandingView({ onNavigate: navigateTo });
   } else if (viewName === 'analyzer') {
@@ -59,11 +87,54 @@ export function navigateTo(viewName) {
       onNavigate: navigateTo,
     });
   }
+}
 
-  triggerViewTransition();
+export function navigateTo(viewName) {
+  const root = document.getElementById('appViewRoot');
+  const hadContent = Boolean(root && root.innerHTML.trim().length > 0);
+  const currentToken = ++navTransitionToken;
+
+  appState.currentView = viewName;
+
+  document.querySelectorAll('[data-nav]').forEach((btn) => {
+    const target = btn.getAttribute('data-nav');
+    btn.classList.toggle('active', target === viewName);
+  });
+
+  const mountView = () => {
+    if (currentToken !== navTransitionToken) return;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    renderActiveView(viewName);
+
+    if (root) {
+      root.classList.remove('view-leave', 'view-enter');
+      void root.offsetWidth;
+      root.classList.add('view-enter');
+    }
+
+    requestAnimationFrame(() => {
+      setupScrollRevealAnimations();
+    });
+  };
+
+  if (hadContent && root) {
+    root.classList.remove('view-enter');
+    root.classList.add('view-leave');
+    setTimeout(mountView, 130);
+  } else {
+    mountView();
+  }
 }
 
 async function initApp() {
+  const root = document.getElementById('appViewRoot');
+  if (root && typeof MutationObserver !== 'undefined') {
+    const domObserver = new MutationObserver(() => {
+      setupScrollRevealAnimations();
+    });
+    domObserver.observe(root, { childList: true, subtree: true });
+  }
+
   document.querySelectorAll('[data-nav]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const target = btn.getAttribute('data-nav');
@@ -97,7 +168,7 @@ async function initApp() {
       navigateTo('report');
       return;
     } catch {
-      // Lanjut ke halaman utama bila laporan tidak ditemukan
+      // Lanjut ke beranda bila tidak ditemukan
     }
   }
 
