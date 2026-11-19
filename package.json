@@ -1,0 +1,26 @@
+{
+  "name": "review-detector",
+  "version": "1.0.0",
+  "description": "Review Detector — See through the stars before you buy. Fullstack Product Review Credibility & AI Analysis Platform.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "keywords": [
+    "review-detector",
+    "ecommerce",
+    "trust-score",
+    "gemini-ai",
+    "sentiment-analysis",
+    "fake-review-detection"
+  ],
+  "author": "Review Detector Team",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
