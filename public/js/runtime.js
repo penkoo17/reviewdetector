@@ -1921,45 +1921,161 @@ function renderLandingView({ onNavigate }) {
     .join('');
 
   root.innerHTML = `
-    <section class="hero-minimal anim-card" style="margin:3.25rem auto 2.5rem;">
-      <div class="hero-kicker">
-        ${ICONS.shield}
-        <span>Analisis Kredibilitas Ulasan E-Commerce</span>
+    <section class="hero-split">
+      <!-- Kolom Kiri: Headline, Quick Link Input & Marketplace -->
+      <div class="anim-card">
+        <div class="hero-kicker">
+          ${ICONS.shield}
+          <span>Cek Kredibilitas Ulasan E-Commerce</span>
+        </div>
+
+        <h1 class="hero-title">
+          See through the stars before you buy.
+        </h1>
+
+        <p class="hero-desc">
+          Rating tinggi belum tentu mencerminkan pengalaman pembeli nyata. Tempel tautan produk untuk melihat skor kepercayaan, rating terkoreksi, dan ringkasan keluhan sebelum Anda checkout.
+        </p>
+
+        <!-- Quick Scan Input Bar langsung dari Beranda -->
+        <div class="hero-quick-form">
+          <input
+            type="url"
+            id="heroQuickUrlInput"
+            class="hero-quick-input"
+            placeholder="Tempel link produk (Shopee, Tokopedia, Amazon...)"
+          />
+          <button type="button" class="btn btn-primary" id="heroQuickScanBtn">
+            ${ICONS.search}
+            <span>Periksa Sekarang</span>
+          </button>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;margin-bottom:1.5rem;">
+          <div style="font-size:0.79rem;color:var(--text-muted);">
+            Tidak menghakimi mutlak — hanya memetakan pola agar belanja lebih aman.
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="landingHistoryBtn">
+            ${ICONS.clock}
+            <span>Riwayat</span>
+          </button>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:0.42rem;flex-wrap:wrap;">
+          ${logosRow}
+        </div>
       </div>
 
-      <h1 class="hero-title">
-        See through the stars before you buy.
-      </h1>
+      <!-- Kolom Kanan: Visual Snapshot Preview (Bukan wall of text) -->
+      <div class="preview-card anim-card anim-delay-2">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;margin-bottom:0.85rem;">
+          <span class="mp-chip">${MARKETPLACE_LOGOS.shopee.svg}<span>Contoh Hasil Laporan</span></span>
+          <span class="badge badge-moderate"><span class="risk-dot risk-dot-moderate"></span>Moderate Risk &middot; 64/100</span>
+        </div>
 
-      <p class="hero-desc">
-        Rating tinggi belum tentu menggambarkan pengalaman pembeli sebenarnya. Tempel link produk untuk memeriksa kewajaran ulasan dan hal penting yang perlu Anda ketahui sebelum membeli.
-      </p>
+        <div style="font-weight:700;font-size:1rem;color:var(--text-primary);margin-bottom:0.9rem;">
+          Perbandingan Rating &amp; Pola Ulasan
+        </div>
 
-      <div class="hero-note">
-        <strong>Cara kerja kami:</strong> Review Detector tidak menghakimi ulasan secara mutlak. Aplikasi ini membantu melihat seberapa wajar pola ulasannya dan bagian mana yang perlu dicek ulang sebelum checkout.
+        <div class="rating-compare-box" style="margin-bottom:0.85rem;">
+          <div class="rating-col">
+            <div class="rating-col-label">Rating Toko</div>
+            <div class="rating-col-val" style="color:var(--viz-amber);font-size:1.65rem;">4.8</div>
+          </div>
+          <div class="rating-arrow">${ICONS.arrowRight}</div>
+          <div class="rating-col">
+            <div class="rating-col-label">Terkoreksi</div>
+            <div class="rating-col-val" style="color:var(--risk-moderate-ink);font-size:1.65rem;">4.1</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;padding:0.5rem 0.75rem;border-radius:8px;background:var(--risk-moderate-bg);border:1px solid var(--risk-moderate-border);margin-bottom:0.9rem;">
+          <span style="color:var(--text-secondary);">Ulasan perlu dicek ulang</span>
+          <strong style="font-family:var(--font-mono);color:var(--risk-moderate-ink);">14 dari 38 (37%)</strong>
+        </div>
+
+        <div class="preview-divider"></div>
+
+        <div class="grid-2" style="gap:0.65rem;font-size:0.77rem;">
+          <div style="padding:0.65rem 0.75rem;border-radius:8px;background:#fffafa;border:1px solid #fee2e2;">
+            <div style="font-weight:700;color:var(--risk-high-ink);margin-bottom:0.2rem;">Keluhan Utama</div>
+            <div style="color:var(--text-secondary);">Baterai cepat habis, kemasan penyok</div>
+          </div>
+          <div style="padding:0.65rem 0.75rem;border-radius:8px;background:#f8fdfb;border:1px solid #d1fae5;">
+            <div style="font-weight:700;color:var(--risk-low-ink);margin-bottom:0.2rem;">Pujian Utama</div>
+            <div style="color:var(--text-secondary);">Bahan kokoh, pengiriman cepat</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strip Ringkas 3 Langkah (Pendek, 1 Baris per Kartu) -->
+    <section class="feature-strip anim-card anim-delay-3">
+      <div class="feature-strip-item">
+        <span class="feature-step-num">01</span>
+        <div>
+          <div style="font-weight:700;font-size:0.88rem;margin-bottom:0.15rem;">Tempel Link Produk</div>
+          <div style="font-size:0.79rem;color:var(--text-secondary);">Salin tautan produk dari marketplace dan jalankan pemindaian otomatis.</div>
+        </div>
       </div>
 
-      <div style="display:flex;align-items:center;justify-content:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:2.25rem;">
-        <button type="button" class="btn btn-primary btn-lg" id="landingStartAnalyzeBtn">
-          ${ICONS.link}
-          <span>Periksa Link Produk</span>
-          ${ICONS.arrowRight}
-        </button>
-        <button type="button" class="btn btn-secondary btn-lg" id="landingHistoryBtn">
-          ${ICONS.clock}
-          <span>Lihat Riwayat</span>
-        </button>
+      <div class="feature-strip-item">
+        <span class="feature-step-num">02</span>
+        <div>
+          <div style="font-weight:700;font-size:0.88rem;margin-bottom:0.15rem;">Deteksi 3 Lapis Pola</div>
+          <div style="font-size:0.79rem;color:var(--text-secondary);">Memeriksa kualitas teks, perilaku waktu, dan kemiripan antar-akun.</div>
+        </div>
       </div>
 
-      <div style="display:flex;align-items:center;justify-content:center;gap:0.45rem;flex-wrap:wrap;">
-        <span style="font-size:0.75rem;color:var(--text-muted);margin-right:0.2rem;">Mendukung:</span>
-        ${logosRow}
+      <div class="feature-strip-item">
+        <span class="feature-step-num">03</span>
+        <div>
+          <div style="font-weight:700;font-size:0.88rem;margin-bottom:0.15rem;">Keputusan Lebih Yakin</div>
+          <div style="font-size:0.79rem;color:var(--text-secondary);">Lihat rating terkoreksi, rincian alasan skor, serta keluhan teratas.</div>
+        </div>
       </div>
     </section>
   `;
 
-  document.getElementById('landingStartAnalyzeBtn')?.addEventListener('click', () => {
-    onNavigate('analyzer');
+  const quickInput = document.getElementById('heroQuickUrlInput');
+  const quickBtn = document.getElementById('heroQuickScanBtn');
+
+  const runHeroScan = async () => {
+    const rawUrl = quickInput?.value.trim() || '';
+    if (!rawUrl) {
+      onNavigate('analyzer');
+      return;
+    }
+
+    appState.analyzerDraft.productUrl = rawUrl;
+    try {
+      if (quickBtn) {
+        quickBtn.disabled = true;
+        quickBtn.innerHTML = `${ICONS.clock}<span>Memeriksa...</span>`;
+      }
+      const report = await apiClient.analyzeProduct({ productUrl: rawUrl });
+      appState.activeReport = report;
+      const url = new URL(window.location.href);
+      url.searchParams.set('report', report.id);
+      window.history.pushState({}, '', url);
+      showToast(`Selesai memeriksa ${report.metrics.totalReviews} ulasan.`);
+      onNavigate('report');
+    } catch (err) {
+      showToast(err.message);
+    } finally {
+      if (quickBtn) {
+        quickBtn.disabled = false;
+        quickBtn.innerHTML = `${ICONS.search}<span>Periksa Sekarang</span>`;
+      }
+    }
+  };
+
+  quickBtn?.addEventListener('click', runHeroScan);
+  quickInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      runHeroScan();
+    }
   });
 
   document.getElementById('landingHistoryBtn')?.addEventListener('click', () => {
@@ -1977,7 +2093,7 @@ function renderAnalyzerView({ onAnalysisComplete }) {
     .join('');
 
   root.innerHTML = `
-    <div style="max-width:720px;margin:2rem auto 0;">
+    <div style="max-width:760px;margin:1rem auto 0;">
       <div class="anim-card" style="margin-bottom:1.5rem;">
         <div style="font-size:0.74rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--viz-blue);margin-bottom:0.35rem;">
           Pemindai Ulasan Produk
@@ -1986,11 +2102,11 @@ function renderAnalyzerView({ onAnalysisComplete }) {
           Periksa Link Produk
         </h2>
         <p style="color:var(--text-secondary);font-size:0.92rem;">
-          Tempel tautan produk yang ingin Anda cek untuk melihat kewajaran ulasannya sebelum membeli.
+          Tempel tautan produk untuk mendapatkan skor kepercayaan, rating terkoreksi, serta rangkuman keluhan dan pujian pembeli.
         </p>
       </div>
 
-      <div class="card anim-card anim-delay-1">
+      <div class="card anim-card anim-delay-1" style="margin-bottom:1.25rem;">
         <div class="form-group">
           <label class="form-label" for="inputProductUrl">
             Tautan Produk
@@ -2000,7 +2116,7 @@ function renderAnalyzerView({ onAnalysisComplete }) {
             id="inputProductUrl"
             class="form-control"
             style="padding:0.9rem 1.05rem;font-size:0.95rem;"
-            placeholder="Tempel link dari Shopee, Tokopedia, atau marketplace lain..."
+            placeholder="https://shopee.co.id/... atau https://www.tokopedia.com/..."
             value="${escapeHtml(draft.productUrl)}"
             autofocus
           />
@@ -2020,7 +2136,7 @@ function renderAnalyzerView({ onAnalysisComplete }) {
             Mengambil data produk dan ulasan...
           </div>
           <div style="font-size:0.78rem;color:var(--text-secondary);" id="scanProgressStep">
-            Memeriksa isi ulasan, pola waktu, dan kesamaan kalimat...
+            Memeriksa kewajaran teks, pola waktu, dan kemiripan ulasan...
           </div>
         </div>
 
@@ -2033,6 +2149,33 @@ function renderAnalyzerView({ onAnalysisComplete }) {
           ${ICONS.search}
           <span>Periksa Ulasan Sekarang</span>
         </button>
+      </div>
+
+      <!-- Strip Ringkas Apa yang Didapat di Laporan -->
+      <div class="feature-strip anim-card anim-delay-2">
+        <div class="feature-strip-item" style="padding:0.95rem 1.05rem;">
+          <span style="color:var(--risk-low-ink);flex-shrink:0;">${ICONS.shield}</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;">Skor 0–100</div>
+            <div style="font-size:0.75rem;color:var(--text-secondary);">Indikator risiko Low, Moderate, atau High.</div>
+          </div>
+        </div>
+
+        <div class="feature-strip-item" style="padding:0.95rem 1.05rem;">
+          <span style="color:var(--viz-amber);flex-shrink:0;">${ICONS.chart}</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;">Rating Terkoreksi</div>
+            <div style="font-size:0.75rem;color:var(--text-secondary);">Bandingkan rating asli dengan bobot bersih.</div>
+          </div>
+        </div>
+
+        <div class="feature-strip-item" style="padding:0.95rem 1.05rem;">
+          <span style="color:var(--viz-blue);flex-shrink:0;">${ICONS.info}</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;">Alasan Transparan</div>
+            <div style="font-size:0.75rem;color:var(--text-secondary);">Setiap skor disertai rincian sinyal &amp; tema.</div>
+          </div>
+        </div>
       </div>
     </div>
   `;

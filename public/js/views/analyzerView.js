@@ -14,7 +14,7 @@ export function renderAnalyzerView({ onAnalysisComplete }) {
     .join('');
 
   root.innerHTML = `
-    <div style="max-width:720px;margin:2rem auto 0;">
+    <div style="max-width:760px;margin:1rem auto 0;">
       <div class="anim-card" style="margin-bottom:1.5rem;">
         <div style="font-size:0.74rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--viz-blue);margin-bottom:0.35rem;">
           Pemindai Ulasan Produk
@@ -23,11 +23,11 @@ export function renderAnalyzerView({ onAnalysisComplete }) {
           Periksa Link Produk
         </h2>
         <p style="color:var(--text-secondary);font-size:0.92rem;">
-          Tempel tautan produk yang ingin Anda cek untuk melihat kewajaran ulasannya sebelum membeli.
+          Tempel tautan produk untuk mendapatkan skor kepercayaan, rating terkoreksi, serta rangkuman keluhan dan pujian pembeli.
         </p>
       </div>
 
-      <div class="card anim-card anim-delay-1">
+      <div class="card anim-card anim-delay-1" style="margin-bottom:1.25rem;">
         <div class="form-group">
           <label class="form-label" for="inputProductUrl">
             Tautan Produk
@@ -37,7 +37,7 @@ export function renderAnalyzerView({ onAnalysisComplete }) {
             id="inputProductUrl"
             class="form-control"
             style="padding:0.9rem 1.05rem;font-size:0.95rem;"
-            placeholder="Tempel link dari Shopee, Tokopedia, atau marketplace lain..."
+            placeholder="https://shopee.co.id/... atau https://www.tokopedia.com/..."
             value="${escapeHtml(draft.productUrl)}"
             autofocus
           />
@@ -57,7 +57,7 @@ export function renderAnalyzerView({ onAnalysisComplete }) {
             Mengambil data produk dan ulasan...
           </div>
           <div style="font-size:0.78rem;color:var(--text-secondary);" id="scanProgressStep">
-            Memeriksa isi ulasan, pola waktu, dan kesamaan kalimat...
+            Memeriksa kewajaran teks, pola waktu, dan kemiripan ulasan...
           </div>
         </div>
 
@@ -70,6 +70,33 @@ export function renderAnalyzerView({ onAnalysisComplete }) {
           ${ICONS.search}
           <span>Periksa Ulasan Sekarang</span>
         </button>
+      </div>
+
+      <!-- Strip Ringkas Apa yang Didapat di Laporan -->
+      <div class="feature-strip anim-card anim-delay-2">
+        <div class="feature-strip-item" style="padding:0.95rem 1.05rem;">
+          <span style="color:var(--risk-low-ink);flex-shrink:0;">${ICONS.shield}</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;">Skor 0–100</div>
+            <div style="font-size:0.75rem;color:var(--text-secondary);">Indikator risiko Low, Moderate, atau High.</div>
+          </div>
+        </div>
+
+        <div class="feature-strip-item" style="padding:0.95rem 1.05rem;">
+          <span style="color:var(--viz-amber);flex-shrink:0;">${ICONS.chart}</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;">Rating Terkoreksi</div>
+            <div style="font-size:0.75rem;color:var(--text-secondary);">Bandingkan rating asli dengan bobot bersih.</div>
+          </div>
+        </div>
+
+        <div class="feature-strip-item" style="padding:0.95rem 1.05rem;">
+          <span style="color:var(--viz-blue);flex-shrink:0;">${ICONS.info}</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;">Alasan Transparan</div>
+            <div style="font-size:0.75rem;color:var(--text-secondary);">Setiap skor disertai rincian sinyal &amp; tema.</div>
+          </div>
+        </div>
       </div>
     </div>
   `;
